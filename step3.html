@@ -37,16 +37,16 @@ function redirectToIndex() {
     window.location.href = 'step2.html';
 }
 function validateForm() {
-  // Get all input elements (including text and checkboxes)
+  // Get all input elements (including text and radio buttons)
   var inputs = document.querySelectorAll('#question-form input');
 
-  // Check if any input is empty (including checkboxes without selection)
+  // Check if any input is empty (including radio buttons without selection)
   for (var i = 0; i < inputs.length; i++) {
     if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
       alert("Veuillez saisir une valeur pour tous les champs obligatoires. Certains champs de texte semblent vides.");
       return false; // Prevent form submission
     } else if (inputs[i].type === 'radio' && !inputs[i].checked) {
-      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Veuillez sélectionner une option pour les cases à cocher.");
+      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Veuillez sélectionner une option pour les boutons.");
       return false; // Prevent form submission
     }
   }
