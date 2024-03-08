@@ -45,7 +45,7 @@ function validateForm() {
     if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
       alert("Veuillez saisir une valeur pour tous les champs obligatoires. Certains champs de texte semblent vides.");
       return false; // Prevent form submission
-    } else if (inputs[i].type === 'checkbox' && !inputs[i].checked) {
+    } else if (inputs[i].type === 'radio' && !inputs[i].checked) {
       alert("Veuillez saisir une valeur pour tous les champs obligatoires. Veuillez sélectionner une option pour les cases à cocher.");
       return false; // Prevent form submission
     }
