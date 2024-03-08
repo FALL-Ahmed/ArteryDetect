@@ -40,13 +40,25 @@ function validateForm() {
   // Get all input elements (including text and radio buttons)
   var inputs = document.querySelectorAll('#question-form input');
 
+  var radioGroups = {}; // Object to store radio button groups
+
   // Check if any input is empty (including radio buttons without selection)
   for (var i = 0; i < inputs.length; i++) {
     if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
       alert("Veuillez saisir une valeur pour tous les champs obligatoires. Certains champs de texte semblent vides.");
       return false; // Prevent form submission
-    } else if (inputs[i].type === 'radio' && !inputs[i].checked) {
-      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Veuillez sélectionner une option pour les boutons.");
+    } else if (inputs[i].type === 'radio') {
+      // Check if at least one option is selected in each radio group
+      if (!radioGroups[inputs[i].name]) {
+        radioGroups[inputs[i].name] = true; // Mark the group as having a selection
+      }
+    }
+  }
+
+  // Check if all radio groups have at least one option selected
+  for (var group in radioGroups) {
+    if (!radioGroups[group]) {
+      alert("Veuillez sélectionner une option pour tous les groupes de boutons radio.");
       return false; // Prevent form submission
     }
   }
@@ -55,6 +67,7 @@ function validateForm() {
   redirectToNextStep();
   return true;
 }
+
 
 function redirectToNextStep() {
     // Get form elements
