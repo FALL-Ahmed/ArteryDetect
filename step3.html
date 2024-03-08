@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étape 3</title>
+    <link rel="stylesheet" href="css/styles3.css">
+
+</head>
+<body>
+    <h1>Étape 3</h1>
+    <img src="/image/logo.png" alt="Votre image" class="bottom-image1">
+<form id="question-form">
+    <label for="st_d3">Valeur de l'amplitude du segment ST en D3 :</label>
+        <input type="text" id="st_d3" name="st_d3"><br>
+        <label for="st_avl">Valeur de l'amplitude du segment ST en AVL :</label>
+        <input type="text" id="st_avl" name="st_avl"><br>
+        <div class="checkbox-group">
+            <input type="radio" id="shift_avl" name="shift_avl" value="1"> <label for="shift_avl">Sus décalage</label>
+            <input type="radio" id="shift_avl1" name="shift_avl" value="-1"> <label for="shift_avl1">Sous décalage</label><br>
+        </div>
+        <label for="st_v6">Valeur de l'amplitude du segment ST en V6 :</label>
+        <input type="text" id="st_v6" name="st_v6"><br>
+        <div class="checkbox-group">
+            <input type="radio" id="shift_v6" name="shift_v6" value="1"> <label for="shift_v6">Sus décalage</label>
+            <input type="radio" id="shift_v7" name="shift_v6" value="-1"> <label for="shift_v7">Sous décalage</label><br>
+        </div>
+        <button type="button" onclick="validateForm()">Suivant</button>
+    </form>
+    <img src="/image/algo.png" alt="Votre image" class="bottom-image">
+    <button onclick="redirectToIndex()" class="back-button">
+        <img src="/image/back.png" alt="Logo Back">
+    </button>
+</body>
+<script>
+function redirectToIndex() {
+    window.location.href = 'step2.html';
+}
+function validateForm() {
+  // Get all input elements (including text and checkboxes)
+  var inputs = document.querySelectorAll('#question-form input');
+
+  // Check if any input is empty (including checkboxes without selection)
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
+      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Certains champs de texte semblent vides.");
+      return false; // Prevent form submission
+    } else if (inputs[i].type === 'checkbox' && !inputs[i].checked) {
+      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Veuillez sélectionner une option pour les cases à cocher.");
+      return false; // Prevent form submission
+    }
+  }
+
+  // If all inputs are valid, allow form submission
+  redirectToNextStep();
+  return true;
+}
+
+function redirectToNextStep() {
+    // Get form elements
+    var st_d3 = parseFloat(document.getElementById('st_d3').value);
+    var st_avl = parseFloat(document.getElementById('st_avl').value);
+    var st_v6 = parseFloat(document.getElementById('st_v6').value);
+
+    // Display result in console for debugging (optional)
+    console.log("La valeur de result est :", st_d3);
+    console.log("La valeur de result est :", st_avl);
+    console.log("La valeur de result est :", st_v6);
+
+    // Set default shift values (assuming 1 for normal, -1 for under-shift)
+    var shift_avl = 1;
+    var shift_v6 = 1;
+
+    // Check for checked checkboxes and adjust shift values accordingly
+    var shift_avl_sous = document.getElementById('shift_avl1');
+    var shift_v7_sous = document.getElementById('shift_v7');
+
+    if (shift_avl1 && shift_avl1.checked) {
+        shift_avl = -1;
+    }
+
+    if (shift_v7 && shift_v7.checked) {
+        shift_v6 = -1;
+    }
+
+    // Calculate result
+    var result = st_d3 - (st_avl * shift_avl) - (st_v6 * shift_v6);
+
+    // Display result in console for debugging (optional)
+    console.log("La valeur de result est :", result);
+
+    // Redirect based on result
+    if (result >= 2) {
+        window.location.href = 'artere_coronaire_droite.html';
+    } else {
+        window.location.href = 'artere_circonflexe.html';
+    }
+}
+
+    </script>
+</html>

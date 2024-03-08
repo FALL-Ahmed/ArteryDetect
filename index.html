@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Étape 1</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        function validateForm() {
+            const radios = document.getElementsByName('answer');
+            let isChecked = false;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+
+            if (!isChecked) {
+                alert('Veuillez sélectionner une réponse.');
+                return false; // Prevent form submission
+            }
+
+            // Your form processing logic goes here after successful validation
+            redirectToNextStep();
+
+            return true; // Allow form submission if validation passes
+        }
+
+        function redirectToNextStep() {
+            var answer;
+            var radios = document.getElementsByName('answer');
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    answer = radios[i].value.toUpperCase();
+                    break;
+                }
+            }
+
+            var nextStep;
+            if (answer === "OUI") {
+                nextStep = "artere_coronaire_droite.html";
+            } else if (answer === "NON" || answer === "NON DISPONIBLE") {
+                nextStep = "step2.html";
+            } else {
+                nextStep = "reponse_invalide.html";
+            }
+
+            window.location.href = nextStep;
+        }
+    </script>
+</head>
+<body>
+    <h1>Étape 1</h1>
+    <img src="image/logo.png" alt="Votre image" class="bottom-image1">
+      <form id="question-form">
+        <label for="answer">L'amplitude du segment ST est-elle supérieure ou égale à 1mm en V3R ET en V4R ?</label><br>
+        <input type="radio" id="oui" name="answer" value="OUI">
+        <label for="oui">OUI</label><br>
+        <input type="radio" id="non" name="answer" value="NON">
+        <label for="non">NON</label><br>
+          <button type="button" onclick="validateForm()">Suivant</button>
+    </form>
+    <img src="image/algo.png" alt="Votre image" class="bottom-image">
+    <div id="response"></div>
+</body>
+</html>
