@@ -70,18 +70,19 @@ button:hover {
     width: 35%;
     height: auto;
     position: fixed;
-    bottom: 30px; /* Ajustez cette valeur selon vos besoins */
+    bottom: 5%; /* Ajustez cette valeur selon vos besoins */
     left: 50%;
     transform: translateX(-50%);
 }
 .bottom-image1 {
-    width: 20%;
-    height: auto;
+    width: 20%; /* Utilisation d'un pourcentage pour la largeur */
+    height: auto; /* La hauteur s'ajustera automatiquement pour conserver les proportions de l'image */
     position: fixed;
-    bottom: 430px; /* Ajustez cette valeur selon vos besoins */
+    bottom: 70%; /* Positionnement relatif par rapport à la hauteur de la fenêtre */
     left: 50%;
     transform: translateX(-50%);
 }
+
 .back-button {
     position: fixed;
     top: 10px; /* Ajustez cette valeur selon vos besoins */
