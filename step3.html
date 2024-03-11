@@ -9,17 +9,17 @@
 </head>
 <body>
     <h1>Étape 3</h1>
-    <img src="Image/logo.png" alt="Votre image" class="bottom-image1">
+    <img src="Image/logo1.png" alt="Votre image" class="bottom-image1">
 <form id="question-form">
-    <label for="st_d3">Valeur de l'amplitude du segment ST en D3 :</label>
+    <label for="st_d3">Amplitude du segment ST au point J en D3:</label>
         <input type="text" id="st_d3" name="st_d3"><br>
-        <label for="st_avl">Valeur de l'amplitude du segment ST en AVL :</label>
+        <label for="st_avl">Amplitude du segment ST au point J en AVL :</label>
         <input type="text" id="st_avl" name="st_avl"><br>
         <div class="checkbox-group">
             <input type="radio" id="shift_avl" name="shift_avl" value="1"> <label for="shift_avl">Sus décalage</label>
             <input type="radio" id="shift_avl1" name="shift_avl" value="-1"> <label for="shift_avl1">Sous décalage</label><br>
         </div>
-        <label for="st_v6">Valeur de l'amplitude du segment ST en V6 :</label>
+        <label for="st_v6">Amplitude du segment ST au point J en V6 :</label>
         <input type="text" id="st_v6" name="st_v6"><br>
         <div class="checkbox-group">
             <input type="radio" id="shift_v6" name="shift_v6" value="1"> <label for="shift_v6">Sus décalage</label>
@@ -42,6 +42,16 @@ function validateForm() {
 
   var radioGroups = {}; // Object to store radio button groups
 
+  // Initialize radio groups
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'radio') {
+      if (!radioGroups[inputs[i].name]) {
+        radioGroups[inputs[i].name] = []; // Create an array to store radio buttons in each group
+      }
+      radioGroups[inputs[i].name].push(inputs[i]); // Add the current radio button to its group
+    }
+  }
+
   // Check if any input is empty (including radio buttons without selection)
   for (var i = 0; i < inputs.length; i++) {
     if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
@@ -49,17 +59,10 @@ function validateForm() {
       return false; // Prevent form submission
     } else if (inputs[i].type === 'radio') {
       // Check if at least one option is selected in each radio group
-      if (!radioGroups[inputs[i].name]) {
-        radioGroups[inputs[i].name] = true; // Mark the group as having a selection
+      if (!radioGroups[inputs[i].name].some(function(radio) { return radio.checked; })) {
+        alert("Veuillez sélectionner une option Sus ou Sous pour chaque groupe.");
+        return false; // Prevent form submission
       }
-    }
-  }
-
-  // Check if all radio groups have at least one option selected
-  for (var group in radioGroups) {
-    if (!radioGroups[group]) {
-      alert("Veuillez sélectionner une option pour tous les groupes de boutons radio.");
-      return false; // Prevent form submission
     }
   }
 
@@ -67,6 +70,7 @@ function validateForm() {
   redirectToNextStep();
   return true;
 }
+
 
 
 function redirectToNextStep() {

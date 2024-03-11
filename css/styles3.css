@@ -78,7 +78,7 @@ button:hover {
     width: 20%;
     height: auto;
     position: fixed;
-    bottom: 430px; /* Ajustez cette valeur selon vos besoins */
+    bottom: 70%; /* Positionnement relatif par rapport à la hauteur de la fenêtre */
     left: 50%;
     transform: translateX(-50%);
 }
