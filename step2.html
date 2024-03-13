@@ -98,7 +98,7 @@ function redirectToNextStep() {
 
 
     // Redirect based on result
-    if (st_avl * shift_avl > st_v6 * shift_v6) {
+    if (st_avl * shift_avl < st_v6 * shift_v6) {
         window.location.href = 'artere_circonflexe.html';
     } else {
         window.location.href = 'step3.html';
