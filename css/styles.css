@@ -34,7 +34,7 @@ h1 {
 }
 /* Styles pour le formulaire */
 form {
-    max-width: 1000px;
+    max-width: 700px;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
@@ -45,8 +45,8 @@ form {
 /* Styles pour les champs de saisie texte */
 input[type="text"] {
     margin-bottom: 5px;
-    text-align: right; /* Alignement du texte à droite */
-     width: 50%; /* Occupe toute la largeur disponible */
+    text-align: left; /* Alignement du texte à droite */
+     width: 60%; /* Occupe toute la largeur disponible */
 }
 
 /* Styles pour les boutons */
@@ -67,22 +67,21 @@ button:hover {
 
 /* Styles pour l'image en bas */
 .bottom-image {
-    width: 35%;
+    width: 25%;
     height: auto;
     position: fixed;
-    bottom: 5%; /* Ajustez cette valeur selon vos besoins */
+    bottom: 10px; /* Ajustez cette valeur selon vos besoins */
     left: 50%;
     transform: translateX(-50%);
 }
 .bottom-image1 {
-    width: 20%; /* Utilisation d'un pourcentage pour la largeur */
-    height: auto; /* La hauteur s'ajustera automatiquement pour conserver les proportions de l'image */
+    width: 20%;
+    height: auto;
     position: fixed;
     bottom: 70%; /* Positionnement relatif par rapport à la hauteur de la fenêtre */
     left: 50%;
     transform: translateX(-50%);
 }
-
 .back-button {
     position: fixed;
     top: 10px; /* Ajustez cette valeur selon vos besoins */
@@ -100,3 +99,4 @@ button:hover {
     transform: scale(1.05); /* Slight scaling for animation effect */
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Shadow for depth effect */
 }
+

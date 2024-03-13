@@ -5,69 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Étape 2</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-        function validateForm() {
-            const radios = document.getElementsByName('answer');
-            let isChecked = false;
-            for (const radio of radios) {
-                if (radio.checked) {
-                    isChecked = true;
-                    break;
-                }
-            }
 
-            if (!isChecked) {
-                alert('Veuillez sélectionner une réponse.');
-                return false; // Prevent form submission
-            }
-
-            // Your form processing logic goes here after successful validation
-            redirectToNextStep();
-
-            return true; // Allow form submission if validation passes
-        }
-
-
-        function redirectToNextStep() {
-            var answer;
-            var radios = document.getElementsByName('answer');
-            for (var i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    answer = radios[i].value.toUpperCase();
-                    break;
-                }
-            }
-
-            var nextStep;
-            if (answer === "OUI") {
-                nextStep = "artere_circonflexe.html";
-            } else if (answer === "NON" || answer === "NON DISPONIBLE") {
-                nextStep = "step3.html";
-            } else {
-                nextStep = "reponse_invalide.html";
-            }
-
-            window.location.href = nextStep;
-        }
-       function redirectToIndex() {
-    window.location.href = 'index.html';
-}
-    </script>
 </head>
 <body>
     <h1>Étape 2</h1>
     <img src="Image/logo1.png" alt="Votre image" class="bottom-image1">
-    <form id="question-form" >
-        <label for="answer">L’amplitude ST à la dérivation AVR est-elle plus ample que AVL ?</label><br>
-        <input type="radio" id="oui" name="answer" value="OUI">
-        <label for="oui">OUI</label><br>
-        <input type="radio" id="non" name="answer" value="NON">
-        <label for="non">NON</label><br>
-       <button type="button" onclick="validateForm()">Suivant</button>
+<form id="question-form">
+        <label for="st_avl">L’amplitude du segment ST au point J en AVR  :</label>
+        <input type="text" id="st_avl" name="st_avl"><br>
+        <div class="checkbox-group">
+            <input type="radio" id="shift_avl" name="shift_avl" value="1"> <label for="shift_avl">Sus décalage</label>
+            <input type="radio" id="shift_avl1" name="shift_avl" value="-1"> <label for="shift_avl1">Sous décalage</label><br>
+        </div>
+        <label for="st_v6">L’amplitude du segment ST au point J en AVL </label>
+        <input type="text" id="st_v6" name="st_v6"><br>
+        <div class="checkbox-group">
+            <input type="radio" id="shift_v6" name="shift_v6" value="1"> <label for="shift_v6">Sus décalage</label>
+            <input type="radio" id="shift_v7" name="shift_v6" value="-1"> <label for="shift_v7">Sous décalage</label><br>
+        </div>
+        <button type="button" onclick="validateForm()">Suivant</button>
     </form>
     <img src="Image/algo.png" alt="Votre image" class="bottom-image">
     <button onclick="redirectToIndex()" class="back-button">
         <img src="Image/back.png" alt="Logo Back">
     </button>
 </body>
+<script>
+function redirectToIndex() {
+    window.location.href = 'step2.html';
+}
+function validateForm() {
+  // Get all input elements (including text and radio buttons)
+  var inputs = document.querySelectorAll('#question-form input');
+
+  var radioGroups = {}; // Object to store radio button groups
+
+  // Initialize radio groups
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'radio') {
+      if (!radioGroups[inputs[i].name]) {
+        radioGroups[inputs[i].name] = []; // Create an array to store radio buttons in each group
+      }
+      radioGroups[inputs[i].name].push(inputs[i]); // Add the current radio button to its group
+    }
+  }
+
+  // Check if any input is empty (including radio buttons without selection)
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
+      alert("Veuillez saisir une valeur pour tous les champs obligatoires. Certains champs de texte semblent vides.");
+      return false; // Prevent form submission
+    } else if (inputs[i].type === 'radio') {
+      // Check if at least one option is selected in each radio group
+      if (!radioGroups[inputs[i].name].some(function(radio) { return radio.checked; })) {
+        alert("Veuillez sélectionner une option Sus ou Sous pour chaque groupe.");
+        return false; // Prevent form submission
+      }
+    }
+  }
+
+  // If all inputs are valid, allow form submission
+  redirectToNextStep();
+  return true;
+}
+
+
+
+function redirectToNextStep() {
+    // Get form elements
+    var st_avl = parseFloat(document.getElementById('st_avl').value);
+    var st_v6 = parseFloat(document.getElementById('st_v6').value);
+
+    // Display result in console for debugging (optional)
+    console.log("La valeur de result est :", st_avl);
+    console.log("La valeur de result est :", st_v6);
+
+    // Set default shift values (assuming 1 for normal, -1 for under-shift)
+    var shift_avl = 1;
+    var shift_v6 = 1;
+
+    // Check for checked checkboxes and adjust shift values accordingly
+    var shift_avl_sous = document.getElementById('shift_avl1');
+    var shift_v7_sous = document.getElementById('shift_v7');
+
+    if (shift_avl1 && shift_avl1.checked) {
+        shift_avl = -1;
+    }
+
+    if (shift_v7 && shift_v7.checked) {
+        shift_v6 = -1;
+    }
+
+
+    // Redirect based on result
+    if (st_avl * shift_avl > st_v6 * shift_v6) {
+        window.location.href = 'artere_circonflexe.html';
+    } else {
+        window.location.href = 'step3.html';
+    }
+}
+
+    </script>
 </html>
